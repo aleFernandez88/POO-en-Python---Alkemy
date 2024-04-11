@@ -61,11 +61,11 @@ def editar(request):
 # --------------------------------------------------------------------------
 
 def proveedores(request):
-    proveedor = Proveedor.objects.all()
+    proveedores = Proveedor.objects.all()
     return render(
         request,
         "proveedores.html",
-        {'proveedor': proveedor}
+        {'proveedores': proveedores}
     )
 
 
@@ -95,7 +95,7 @@ def editarProveedor(request, id):
     )
 
 
-def editar(request):
+def editarPro(request):
     nombre = request.POST["nombre"]
     apellido = request.POST["apellido"]
     dni = request.POST["dni"]

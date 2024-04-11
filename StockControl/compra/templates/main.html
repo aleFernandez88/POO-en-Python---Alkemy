@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +13,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
@@ -38,11 +41,11 @@
             </div>
         </nav>
     </header>
-
-    {% block content %}
-    <h1>StockControl</h1>
-    {% endblock %}
-
+    <div class="container-fluid w-100 backGround-home">
+        {% block content %}
+        <h1>StockControl</h1>
+        {% endblock %}
+    </div>
 </body>
 
 </html>
