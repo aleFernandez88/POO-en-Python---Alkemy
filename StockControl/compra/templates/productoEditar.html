@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container-fluid w-75">
+    <h1 class="text-center">Productos</h1>
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'editado' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{producto.id}}">
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Nombre</label>
+            <input name="nombre" type="text" class="form-control" id="exampleInputEmail1" required value="{{producto.nombre}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Precio</label>
+            <input name="precio" type="number" class="form-control" required value="{{producto.precio}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Stock</label>
+            <input name="stock_actual" type="number" class="form-control" required value="{{producto.stock_actual}}">
+        </div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

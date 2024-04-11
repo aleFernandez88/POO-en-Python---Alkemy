@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container-fluid w-75">
+
+    {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+    <h1 class="text-center">Proveedores</h1>
+
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'agregarProveedor' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Nombre</label>
+            <input name="nombre" type="text" class="form-control" id="exampleInputEmail1" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Apellido</label>
+            <input name="apellido" type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputText" class="form-label">Dni</label>
+            <input name="dni" type="number" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+    <table class="table table-light ">
+        <tr class="table-dark">
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Dni</th>
+            <th colspan="2">
+            </th>
+        </tr>
+        {% for proveedor in proveedores %}
+        <tr>
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.apellido }}</td>
+            <td>{{ proveedor.dni }}</td>
+            <td>
+                <form action="{% url 'eliminarProveedor' proveedor.id %}"
+                    onClick="return confirm('Esta seguro de eliminar este proveedor?')">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'editarProveedor' proveedor.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-warning">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
