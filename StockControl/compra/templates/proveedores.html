@@ -1,6 +1,8 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
-<div class="container-fluid w-75">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="container-fluid w-75 container-home">
 
     {% if messages %}
 
@@ -12,25 +14,27 @@
 
     {% endif %}
 
-    <h1 class="text-center">Proveedores</h1>
+    <h1 class="text-center form-label">Proveedores</h1>
+    <div class="w-50 shadow mx-auto p-4 m-3 login-dark">
+        <form class="shadow mx-auto p-4 w-100" method="post" action="{% url 'agregarProveedor' %}">
+            {% csrf_token %}
+            <div class="mb-3 form-group">
+                <label for="exampleInputText" class="form-label">Nombre</label>
+                <input name="nombre" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="exampleInputText" class="form-label">Apellido</label>
+                <input name="apellido" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="exampleInputText" class="form-label">Dni</label>
+                <input name="dni" type="number" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 
-    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'agregarProveedor' %}">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="exampleInputText" class="form-label">Nombre</label>
-            <input name="nombre" type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputText" class="form-label">Apellido</label>
-            <input name="apellido" type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputText" class="form-label">Dni</label>
-            <input name="dni" type="number" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-    <table class="table table-light ">
+    <table class="table table-dark ">
         <tr class="table-dark">
             <th>Nombre</th>
             <th>Apellido</th>
@@ -63,5 +67,4 @@
         </tr>
         {% endfor %}
     </table>
-</div>
-{% endblock %}
+    {% endblock %}
